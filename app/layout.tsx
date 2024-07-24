@@ -12,7 +12,7 @@ const config = {
   Author: 'Arturs Osipovs'
 }
 
-function LogoHomoLink() {
+function LogoHomeLink() {
   return (
     <Link href="/">
       <button className="p-1.5 outline-primary-6 hover:[&_svg]:text-primary">
@@ -27,7 +27,7 @@ function Header() {
     <header className="flex w-full items-center justify-between bg-neutral-2 pr-[50px]">
       <div className="flex items-center gap-4">
         <div className="flex size-[50px] items-center justify-center">
-          <LogoHomoLink />
+          <LogoHomeLink />
         </div>
         <span className="text-sm text-text-3">Devices</span>
       </div>

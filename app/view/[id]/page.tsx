@@ -1,5 +1,7 @@
 import type { Device } from '@/src/types/devices'
+import { redirect } from 'next/navigation'
 import { fetchDevices } from '@/src/api/api.devices'
+import { Suspense } from 'react'
 import { Button } from '@/components/ui/button'
 import {
   Dialog,
@@ -8,6 +10,7 @@ import {
   DialogTitle,
   DialogTrigger
 } from '@/components/ui/dialog'
+import { Loader } from '@/app/components/loader'
 import { NotFound } from '@/app/components/notFound'
 import { ProductImage } from '@/app/components/productImage'
 import { BackButton } from '@/app/view/[id]/components/backBtn'
@@ -46,12 +49,40 @@ function DetailsJsonDialog({ device }: { device: Device }) {
   )
 }
 
-export default async function View(props: { params: { id: string } }) {
+async function InfoBody({ id }: { id: string }) {
   const payload = await fetchDevices()
-  const device = payload?.devices.find(device => device.id === props.params.id)
+  const device = payload?.devices.find(device => device.id === id)
 
   if (!device) {
     return <NotFound />
+  }
+
+  return (
+    <article className="mt-7 flex items-start justify-center gap-8">
+      <div className="">
+        <div className="mb-10 h-full bg-neutral-1">
+          <ProductImage device={device} size={260} />
+        </div>
+      </div>
+      <div>
+        <h1 className="mb-2 text-2xl font-bold">{device.product.name}</h1>
+        <h4 className="mb-5 text-sm text-black text-opacity-45">{device.line.name}</h4>
+        <InfoLine label="Product line" text={device.line.name} />
+        <InfoLine label="ID" text={device.line.id} />
+        <InfoLine label="Name" text={device.product.name} />
+        <InfoLine label="Short Name" text={device.shortnames.join(', ')} />
+        <InfoLine label="Max. Power" text={device.line.name} />
+        <InfoLine label="Speed" text={device?.unifi?.network?.ethernetMaxSpeedMegabitsPerSecond} />
+        <InfoLine label="Number of ports" text={device?.unifi?.network?.numberOfPorts} />
+        <DetailsJsonDialog device={device} />
+      </div>
+    </article>
+  )
+}
+
+export default function View(props: { params: { id: string } }) {
+  if (!props.params.id) {
+    redirect('/404')
   }
 
   return (
@@ -59,28 +90,9 @@ export default async function View(props: { params: { id: string } }) {
       <div>
         <BackButton />
       </div>
-      <article className="mt-7 flex items-start justify-center gap-8">
-        <div className="">
-          <div className="mb-10 h-full bg-neutral-1">
-            <ProductImage device={device} size={260} />
-          </div>
-        </div>
-        <div>
-          <h1 className="mb-2 text-2xl font-bold">{device.product.name}</h1>
-          <h4 className="mb-5 text-sm text-black text-opacity-45">{device.line.name}</h4>
-          <InfoLine label="Product line" text={device.line.name} />
-          <InfoLine label="ID" text={device.line.id} />
-          <InfoLine label="Name" text={device.product.name} />
-          <InfoLine label="Short Name" text={device.shortnames.join(', ')} />
-          <InfoLine label="Max. Power" text={device.line.name} />
-          <InfoLine
-            label="Speed"
-            text={device?.unifi?.network?.ethernetMaxSpeedMegabitsPerSecond}
-          />
-          <InfoLine label="Number of ports" text={device?.unifi?.network?.numberOfPorts} />
-          <DetailsJsonDialog device={device} />
-        </div>
-      </article>
+      <Suspense fallback={<Loader />}>
+        <InfoBody id={props.params.id} />
+      </Suspense>
     </div>
   )
 }

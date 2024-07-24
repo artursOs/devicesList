@@ -1,7 +1,7 @@
 'use client'
 
 import type { Device } from '@/src/types/devices'
-import { useRouter } from 'next/navigation'
+import Link from 'next/link'
 import { useGetJsonData } from '@/src/hooks/useGetJsonData'
 import { useGetUrlProductsState } from '@/src/hooks/useGetUrlProdutcsState'
 import { Suspense, useState } from 'react'
@@ -11,24 +11,19 @@ import { NotFound } from '@/app/components/notFound'
 import { ProductImage } from '@/app/components/productImage'
 
 function Thumbnail({ device }: { device: Device }) {
-  const router = useRouter()
-
   return (
-    <article
-      className="group relative flex min-h-[172px] w-[216px] cursor-pointer flex-col rounded-lg border border-neutral-3"
-      onClick={() => {
-        router.push('/view/' + device.id)
-      }}
-    >
-      <span className="absolute right-2 top-2 text-xs text-primary-6">{device.line.name}</span>
-      <div className="mx-auto flex w-full justify-center rounded-t-lg bg-neutral-1 group-hover:bg-neutral-2">
-        <ProductImage device={device} size={100} />
-      </div>
-      <div className="flex grow flex-col justify-between gap-1 p-2 group-hover:bg-neutral-1">
-        <div className="text-sm text-black text-opacity-85">{device.product.name}</div>
-        <div className="text-xs text-black text-opacity-45">{device.shortnames.join(', ')}</div>
-      </div>
-    </article>
+    <Link href={`/view/${device.id}`}>
+      <article className="group relative flex min-h-[172px] w-[216px] cursor-pointer flex-col rounded-lg border border-neutral-3">
+        <span className="absolute right-2 top-2 text-xs text-primary-6">{device.line.name}</span>
+        <div className="mx-auto flex w-full justify-center rounded-t-lg bg-neutral-1 group-hover:bg-neutral-2">
+          <ProductImage device={device} size={100} />
+        </div>
+        <div className="flex grow flex-col justify-between gap-1 p-2 group-hover:bg-neutral-1">
+          <div className="text-sm text-black text-opacity-85">{device.product.name}</div>
+          <div className="text-xs text-black text-opacity-45">{device.shortnames.join(', ')}</div>
+        </div>
+      </article>
+    </Link>
   )
 }
 

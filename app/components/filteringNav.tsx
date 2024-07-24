@@ -1,12 +1,12 @@
 import type { Device } from '@/src/types/devices'
-import { usePathname, useRouter, useSearchParams } from 'next/navigation'
+import Link from 'next/link'
+import { usePathname, useSearchParams } from 'next/navigation'
 import GridViewIco from '@/public/gridView.svg'
 import ListViewIco from '@/public/listView.svg'
 import { useGetJsonData } from '@/src/hooks/useGetJsonData'
 import { cn } from '@/src/lib/utils'
 import { Search } from 'lucide-react'
-import { ChangeEvent, PropsWithChildren, Suspense, useTransition } from 'react'
-import { Button } from '@/components/ui/button'
+import { ChangeEvent, PropsWithChildren, useTransition } from 'react'
 import { Input } from '@/components/ui/input'
 import { Spinner } from '@/components/ui/spinner'
 import { ProductFilterPopover } from '@/app/components/productLinePopover'
@@ -59,22 +59,20 @@ function SearchInput({
 }
 
 function IcoLink({ href, children }: PropsWithChildren<{ href: string }>) {
-  const router = useRouter()
   const pathName = usePathname()
   const searchParams = useSearchParams()
   const link = href + (searchParams ? '?' + searchParams.toString() : '')
 
   return (
-    <Button
-      onClick={() => router.push(link)}
-      variant="ghost"
+    <Link
+      href={link}
       className={cn(
-        'h-auto rounded p-1.5',
+        'rounded p-1.5 outline-1 outline-primary-6 transition-colors hover:bg-neutral-2 focus:border-primary-6',
         href === pathName ? 'bg-neutral-1 [&_svg]:text-primary' : '[&_svg]:text-[#838691]'
       )}
     >
       {children}
-    </Button>
+    </Link>
   )
 }
 
@@ -86,20 +84,18 @@ export function FilteringNav({
   devices?: Device[]
 }) {
   return (
-    <div className="flex items-center justify-between">
+    <div className="flex flex-wrap items-center justify-between">
       <SearchInput count={devices?.length || 0} setFiltered={devices => setFiltered(devices)} />
 
-      <Suspense>
-        <div className="flex items-center gap-1">
-          <IcoLink href="/">
-            <GridViewIco />
-          </IcoLink>
-          <IcoLink href="/thumbnailView">
-            <ListViewIco />
-          </IcoLink>
-          <ProductFilterPopover />
-        </div>
-      </Suspense>
+      <div className="flex items-center gap-1">
+        <IcoLink href="/">
+          <GridViewIco />
+        </IcoLink>
+        <IcoLink href="/thumbnailView">
+          <ListViewIco />
+        </IcoLink>
+        <ProductFilterPopover />
+      </div>
     </div>
   )
 }

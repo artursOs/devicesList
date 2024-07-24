@@ -5,8 +5,7 @@ import { cva } from 'class-variance-authority'
 import * as React from 'react'
 
 const buttonVariants = cva(
-  `inline-flex items-center justify-center whitespace-nowrap rounded-md text-sm 
-  transition-colors outline-primary-6 outline-1 
+  `inline-flex items-center justify-center whitespace-nowrap rounded-md text-sm transition-colors outline-primary-6 outline-1 
   disabled:pointer-events-none disabled:opacity-50`,
   {
     variants: {
