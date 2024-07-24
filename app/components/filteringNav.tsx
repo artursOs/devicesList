@@ -6,9 +6,9 @@ import { useGetJsonData } from '@/src/hooks/useGetJsonData'
 import { cn } from '@/src/lib/utils'
 import { Search } from 'lucide-react'
 import { ChangeEvent, PropsWithChildren, useTransition } from 'react'
-import { Spinner } from '@/components/spinner'
 import { Button } from '@/components/ui/button'
 import { Input } from '@/components/ui/input'
+import { Spinner } from '@/components/ui/spinner'
 import { ProductFilterPopover } from '@/app/components/productLinePopover'
 
 function SearchInput({
