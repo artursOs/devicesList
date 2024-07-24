@@ -5,7 +5,7 @@ import ListViewIco from '@/public/listView.svg'
 import { useGetJsonData } from '@/src/hooks/useGetJsonData'
 import { cn } from '@/src/lib/utils'
 import { Search } from 'lucide-react'
-import { ChangeEvent, PropsWithChildren, useTransition } from 'react'
+import { ChangeEvent, PropsWithChildren, Suspense, useTransition } from 'react'
 import { Button } from '@/components/ui/button'
 import { Input } from '@/components/ui/input'
 import { Spinner } from '@/components/ui/spinner'
@@ -89,15 +89,17 @@ export function FilteringNav({
     <div className="flex items-center justify-between">
       <SearchInput count={devices?.length || 0} setFiltered={devices => setFiltered(devices)} />
 
-      <div className="flex items-center">
-        <IcoLink href="/">
-          <GridViewIco />
-        </IcoLink>
-        <IcoLink href="/thumbnailView">
-          <ListViewIco />
-        </IcoLink>
-        <ProductFilterPopover />
-      </div>
+      <Suspense>
+        <div className="flex items-center gap-1">
+          <IcoLink href="/">
+            <GridViewIco />
+          </IcoLink>
+          <IcoLink href="/thumbnailView">
+            <ListViewIco />
+          </IcoLink>
+          <ProductFilterPopover />
+        </div>
+      </Suspense>
     </div>
   )
 }

@@ -1,6 +1,5 @@
 'use client'
 
-import { usePathname, useRouter, useSearchParams } from 'next/navigation'
 import { useGetJsonData } from '@/src/hooks/useGetJsonData'
 import { useProductUrlState } from '@/src/hooks/useGetUrlProdutcsState'
 import { Button } from '@/components/ui/button'

@@ -5,7 +5,7 @@ import { useRouter } from 'next/navigation'
 import { useGetJsonData } from '@/src/hooks/useGetJsonData'
 import { useGetUrlProductsState } from '@/src/hooks/useGetUrlProdutcsState'
 import { ColumnDef, flexRender, getCoreRowModel, useReactTable } from '@tanstack/react-table'
-import { forwardRef, useState } from 'react'
+import { forwardRef, Suspense, useState } from 'react'
 import { TableVirtuoso } from 'react-virtuoso'
 import {
   Table,
@@ -132,7 +132,7 @@ function DeviceTable<T extends Device>({
   )
 }
 
-export default function TableView() {
+function TableView() {
   const productsSelected = useGetUrlProductsState()
   const { data, isLoading } = useGetJsonData()
   const [filtered, setFiltered] = useState<Device[] | undefined>()
@@ -153,5 +153,13 @@ export default function TableView() {
         {!devices?.length ? <NotFound /> : <DeviceTable columns={columns} devices={devices} />}
       </div>
     </div>
+  )
+}
+
+export default function PageIndex() {
+  return (
+    <Suspense>
+      <TableView />
+    </Suspense>
   )
 }

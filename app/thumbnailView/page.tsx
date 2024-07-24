@@ -4,7 +4,7 @@ import type { Device } from '@/src/types/devices'
 import { useRouter } from 'next/navigation'
 import { useGetJsonData } from '@/src/hooks/useGetJsonData'
 import { useGetUrlProductsState } from '@/src/hooks/useGetUrlProdutcsState'
-import { useState } from 'react'
+import { Suspense, useState } from 'react'
 import { FilteringNav } from '@/app/components/filteringNav'
 import { Loader } from '@/app/components/loader'
 import { NotFound } from '@/app/components/notFound'
@@ -32,7 +32,7 @@ function Thumbnail({ device }: { device: Device }) {
   )
 }
 
-export default function ThumbnailView() {
+function ThumbnailView() {
   const productsSelected = useGetUrlProductsState()
   const { data, isLoading } = useGetJsonData()
   const [filtered, setFiltered] = useState<Device[] | undefined>()
@@ -44,8 +44,6 @@ export default function ThumbnailView() {
   if (isLoading) {
     return <Loader />
   }
-
-  console.log('d', devices)
 
   return (
     <div className="flex h-full w-full flex-col overflow-hidden px-8">
@@ -60,5 +58,13 @@ export default function ThumbnailView() {
         </section>
       )}
     </div>
+  )
+}
+
+export default function PageThumbnail() {
+  return (
+    <Suspense>
+      <ThumbnailView />
+    </Suspense>
   )
 }
