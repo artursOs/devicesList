@@ -1,30 +1,28 @@
 import { usePathname, useRouter, useSearchParams } from 'next/navigation'
 
-const TERM_KEY = 'term'
+const DEVICE_KEY = 'deviceId'
 
-export function useGetSearchQuery() {
+export function useGetDeviceId() {
   const searchParams = useSearchParams()
-  return searchParams.get(TERM_KEY)
+  return searchParams.get(DEVICE_KEY)
 }
 
-export function useSearchTermProduct() {
+export function useDevicePushToUrl() {
   const router = useRouter()
   const pathname = usePathname()
   const searchParams = useSearchParams()
 
-  function handleTermUpdate(value: string) {
+  function handleDeviceView(value?: string) {
     const newParams = new URLSearchParams(searchParams.toString())
 
     if (!value) {
-      newParams.delete(TERM_KEY)
+      newParams.delete(DEVICE_KEY)
     } else {
-      newParams.set(TERM_KEY, value)
+      newParams.set(DEVICE_KEY, value)
     }
 
     router.push(pathname + '?' + newParams.toString())
   }
 
-  return {
-    handleTermUpdate
-  }
+  return { handleDeviceView }
 }

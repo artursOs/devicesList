@@ -1,10 +1,10 @@
 'use client'
 
 import type { Device } from '@/types/devices'
-import { useRouter } from 'next/navigation'
 import { ColumnDef, flexRender, getCoreRowModel, useReactTable } from '@tanstack/react-table'
 import { forwardRef, useState } from 'react'
 import { TableVirtuoso } from 'react-virtuoso'
+import { useDevicePushToUrl } from '@/hooks/useGetDevice'
 import {
   Table,
   TableBody,
@@ -52,7 +52,7 @@ const columns: ColumnDef<Device>[] = [
 ]
 
 export function TableView<T extends Device>({ devices }: { devices: T[] }) {
-  const router = useRouter()
+  const { handleDeviceView } = useDevicePushToUrl()
   const table = useReactTable({
     data: devices,
     columns,
@@ -99,7 +99,7 @@ export function TableView<T extends Device>({ devices }: { devices: T[] }) {
               {...props}
               className="group"
               onClick={() => {
-                router.push('/view/' + row.original.id)
+                handleDeviceView(row.original.id)
               }}
             >
               {row.getVisibleCells().map(cell => (

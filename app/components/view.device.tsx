@@ -1,7 +1,9 @@
+'use client'
+
 import type { Device } from '@/types/devices'
-import { redirect } from 'next/navigation'
-import { Suspense } from 'react'
-import { fetchDevices } from '@/api/api.devices'
+import { ChevronLeft } from 'lucide-react'
+import { useDevicePushToUrl } from '@/hooks/useGetDevice'
+import { useGetJsonData } from '@/hooks/useGetJsonData'
 import { Button } from '@/components/ui/button'
 import {
   Dialog,
@@ -13,7 +15,23 @@ import {
 import { Loader } from '@/app/components/loader'
 import { NotFound } from '@/app/components/notFound'
 import { ProductImage } from '@/app/components/productImage'
-import { BackButton } from '@/app/view/[id]/components/backBtn'
+
+function BackButton() {
+  const { handleDeviceView } = useDevicePushToUrl()
+
+  return (
+    <Button
+      onClick={() => {
+        handleDeviceView()
+      }}
+      variant="ghost"
+      className="h-[28px] px-1 text-sm text-black text-opacity-45 shadow"
+    >
+      <ChevronLeft width={20} height={20} />
+      Back
+    </Button>
+  )
+}
 
 function InfoLine({ label, text }: { label: string; text: string }) {
   if (!text) {
@@ -49,9 +67,14 @@ function DetailsJsonDialog({ device }: { device: Device }) {
   )
 }
 
-async function InfoBody({ id }: { id: string }) {
-  const payload = await fetchDevices()
-  const device = payload?.devices.find(device => device.id === id)
+function InfoBody({ id }: { id: string }) {
+  const { data, isLoading } = useGetJsonData()
+
+  if (isLoading) {
+    return <Loader />
+  }
+
+  const device = data?.devices.find(device => device.id === id)
 
   if (!device) {
     return <NotFound />
@@ -80,19 +103,13 @@ async function InfoBody({ id }: { id: string }) {
   )
 }
 
-export default function View(props: { params: { id: string } }) {
-  if (!props.params.id) {
-    redirect('/404')
-  }
-
+export function DeviceView({ id }: { id: string }) {
   return (
     <div className="flex h-full w-full flex-col px-8 py-4">
       <div>
         <BackButton />
       </div>
-      <Suspense fallback={<Loader />}>
-        <InfoBody id={props.params.id} />
-      </Suspense>
+      <InfoBody id={id} />
     </div>
   )
 }
