@@ -68,7 +68,7 @@ export default function PageIndex() {
   }
 
   return (
-    <div className="flex h-full w-full flex-col overflow-y-hidden px-8">
+    <div className="flex h-full w-full flex-col overflow-y-hidden px-4 sm:px-8">
       <Suspense>
         <Body devices={data?.devices} />
       </Suspense>

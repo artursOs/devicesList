@@ -50,7 +50,7 @@ export function FilterTermInput({
         <Input
           value={term || ''}
           placeholder="Search"
-          className="bg-[#F6F6F8] pl-12 outline-primary-6 hover:bg-neutral-3 focus:outline-1 sm:w-[320px]"
+          className="bg-[#F6F6F8] pl-12 outline-primary-6 hover:bg-neutral-3 focus:outline-1 sm:w-[320px] sm:text-sm"
           onChange={onChange}
         />
       </div>

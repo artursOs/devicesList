@@ -105,7 +105,7 @@ function InfoBody({ id }: { id: string }) {
 
 export function DeviceView({ id }: { id: string }) {
   return (
-    <div className="flex h-full w-full flex-col px-8 py-4">
+    <div className="flex h-full w-full flex-col py-4">
       <div>
         <BackButton />
       </div>

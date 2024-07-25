@@ -41,8 +41,6 @@ export function ProductFilterPopover() {
       }
     }, {}) || {}
 
-  console.log('productsArr', productsArr.length)
-
   return (
     <Popover>
       <PopoverTrigger asChild>
