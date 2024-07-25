@@ -1,7 +1,7 @@
-import type { Device } from '@/src/types/devices'
+import type { Device } from '@/types/devices'
 import { redirect } from 'next/navigation'
-import { fetchDevices } from '@/src/api/api.devices'
 import { Suspense } from 'react'
+import { fetchDevices } from '@/api/api.devices'
 import { Button } from '@/components/ui/button'
 import {
   Dialog,

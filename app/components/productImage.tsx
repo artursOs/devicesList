@@ -1,6 +1,6 @@
 'use client'
 
-import type { Device } from '@/src/types/devices'
+import type { Device } from '@/types/devices'
 import Image from 'next/image'
 
 function buildImgUrl(id: string, imgDef: string, size: number): string {

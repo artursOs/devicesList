@@ -8,7 +8,6 @@ export function BackButton() {
   const router = useRouter()
 
   return (
-    // <Link href="/">
     <Button
       onClick={() => {
         router.back()
@@ -19,6 +18,5 @@ export function BackButton() {
       <ChevronLeft width={20} height={20} />
       Back
     </Button>
-    // </Link>
   )
 }

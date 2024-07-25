@@ -1,10 +1,10 @@
 import type { ReactNode } from 'react'
 import Logo from '@/assets/Union.svg'
 import { Open_Sans } from 'next/font/google'
-import './globals.css'
 import Link from 'next/link'
-import ProviderReactQuery from '@/src/providers/providers.reactQuery'
+import ProviderReactQuery from '@/providers/providers.reactQuery'
 import NextTopLoader from 'nextjs-toploader'
+import './globals.css'
 
 const openSans = Open_Sans({ subsets: ['latin'] })
 

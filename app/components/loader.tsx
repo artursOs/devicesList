@@ -1,4 +1,4 @@
-import Logo from '@/public/Union.svg'
+import Logo from '@/assets/Union.svg'
 
 export function Loader() {
   return (

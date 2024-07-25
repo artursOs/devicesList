@@ -1,4 +1,4 @@
-import type { Device } from '@/src/types/devices'
+import type { Device } from '@/types/devices'
 import { useQuery } from '@tanstack/react-query'
 
 const endPoint = 'https://static.ui.com/fingerprint/ui/public.json'

@@ -20,11 +20,14 @@
     "paths": {
       "@/*": ["./*"],
       "@/assets/*": ["./public/*"],
-      "@/types/*": ["./src/interfaces/*"],
+      "@/api/*": ["./src/api/*"],
+      "@/types/*": ["./src/types/*"],
       "@/components/*": ["./src/components/*"],
+      "@/providers/*": ["./src/providers/*"],
       "@/config/*": ["./src/config/*"],
       "@/const/*": ["./src/const/*"],
       "@/theme/*": ["./src/theme/*"],
+      "@/hooks/*": ["./src/hooks/*"],
     }
   },
   "include": ["next-env.d.ts", "**/*.ts", "**/*.tsx", ".next/types/**/*.ts"],

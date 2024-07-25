@@ -13,25 +13,17 @@ module.exports = {
   pluginSearchDirs: false,
   importOrder: [
     '<TYPES>',
-    '^@/openApi/(.*)$',
     '^@/types/(.*)$',
     '^@/assets/(.*)$',
-    '^interfaces/(.*)$',
     '^next/(.*)$',
     '<THIRD_PARTY_MODULES>',
     '^@/api/(.*)$',
     '^@/config/(.*)$',
-    '^@/i18n/(.*)$',
-    '^@/const/(.*)$',
     '^@/lib/(.*)$',
     '^@/hooks/(.*)$',
     '^@/components/(.*)$',
-    '^@/markups/(.*)$',
     '^@/app/(.*)$',
-    '^components/(.*)$',
-    '^(?!.*[.]scss$)[./].*$',
-    '^theme/(.*)$',
-    '.(s)css$'
+    '^components/(.*)$'
   ],
   importOrderSeparation: false,
   importOrderSortSpecifiers: false
