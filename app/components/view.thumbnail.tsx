@@ -28,7 +28,7 @@ function Thumbnail({ device }: { device: Device }) {
 
 export function ThumbnailView({ devices }: { devices: Device[] }) {
   return (
-    <section className="my-4 flex flex-row flex-wrap gap-4 overflow-auto">
+    <section className="my-4 flex flex-col flex-wrap items-center gap-4 overflow-auto sm:flex-row sm:items-start">
       {devices.map(device => (
         <Thumbnail key={device.id} device={device} />
       ))}

@@ -39,9 +39,9 @@ function InfoLine({ label, text }: { label: string; text: string }) {
   }
 
   return (
-    <div className="flex flex-wrap items-center justify-between gap-8 py-2 text-sm text-opacity-85 sm:min-w-[400px]">
+    <div className="flex flex-col flex-wrap justify-between py-2 text-sm text-opacity-85 sm:min-w-[400px] sm:flex-row sm:items-center sm:gap-8">
       <div className="whitespace-nowrap text-black text-opacity-85">{label}</div>
-      <div className="text-right text-black text-opacity-45">{text}</div>
+      <div className="text-black text-opacity-45 sm:text-right">{text}</div>
     </div>
   )
 }

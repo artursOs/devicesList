@@ -37,7 +37,7 @@ function Body({ devices }: { devices?: Device[] }) {
         <FilterTermInput
           term={term}
           setTerm={setTerm}
-          count={devices?.length || 0}
+          count={_devices?.length || 0}
           setFiltered={devices => setFiltered(devices)}
         />
 
