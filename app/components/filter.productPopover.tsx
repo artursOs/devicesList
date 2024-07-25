@@ -1,5 +1,6 @@
 'use client'
 
+import { cn } from '@/src/lib/utils'
 import { useGetJsonData } from '@/hooks/useGetJsonData'
 import { useProductUrlState } from '@/hooks/useGetUrlProdutcsState'
 import { Button } from '@/components/ui/button'
@@ -40,12 +41,17 @@ export function ProductFilterPopover() {
       }
     }, {}) || {}
 
+  console.log('productsArr', productsArr.length)
+
   return (
     <Popover>
       <PopoverTrigger asChild>
         <Button
           variant="ghost"
-          className="h-auto p-1.5 text-black text-opacity-45 data-[state=open]:bg-neutral-1 data-[state=open]:text-primary-6"
+          className={cn(
+            `h-auto p-1.5 text-black text-opacity-45 data-[state=open]:bg-neutral-1 data-[state=open]:text-primary-6`,
+            `${productsArr.length ? 'bg-neutral-1 text-primary-6' : ''}`
+          )}
         >
           Filter
         </Button>
